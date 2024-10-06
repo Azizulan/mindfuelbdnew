@@ -1,7 +1,7 @@
 import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
-const SampleNextArrow = (props) => {
+const SampleNextArrow = (props: any) => {
   const { onClick } = props;
   return (
     <div

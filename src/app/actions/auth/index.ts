@@ -1,4 +1,5 @@
 "use server";
+import { cookies } from "next/headers";
 import { z } from "zod";
 
 // Shopify REST API endpoint
@@ -46,7 +47,6 @@ export const registerAction = async (data: object) => {
   };
 
   try {
-    console.log(User);
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -56,8 +56,7 @@ export const registerAction = async (data: object) => {
       body: JSON.stringify(nesUser),
     });
 
-    const data = await response.json();
-    console.log(data);
+    await response.json();
 
     return { success: true, message: "User created successfully", status: 200 };
   } catch (error) {
@@ -125,6 +124,15 @@ export const loginAction = async (data: object) => {
     // Successful login, return the access token
     const accessToken =
       data.data.customerAccessTokenCreate.customerAccessToken.accessToken;
+
+    // Set the access token in the cookies
+    cookies().set("MindFuel_accessToken", accessToken, {
+      // httpOnly: true,
+      // secure: true, 
+      // sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 10,
+    });
+
     return {
       success: true,
       accessToken,

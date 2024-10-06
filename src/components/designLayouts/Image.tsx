@@ -1,6 +1,12 @@
-import React from "react";
+/* eslint-disable */
 
-const Image = ({ imgSrc, className }) => {
+const Image = ({
+  imgSrc,
+  className,
+}: {
+  imgSrc: string;
+  className?: string;
+}) => {
   return <img className={className} src={imgSrc} alt={imgSrc} />;
 };
 

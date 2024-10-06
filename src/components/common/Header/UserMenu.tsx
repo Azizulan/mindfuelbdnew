@@ -12,6 +12,8 @@ const UserMenu = () => {
   const { isAuthenticated, logout } = useAuth();
   const router = useRouter();
 
+  console.log(isAuthenticated);
+
   const handleLogout = () => {
     logout();
     setShowUser(false);

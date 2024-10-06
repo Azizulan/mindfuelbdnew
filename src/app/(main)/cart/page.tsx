@@ -1,11 +1,22 @@
 import Breadcrumbs from "@/components/pageProps/Breadcrumbs";
+import { getCartInfo } from "@/lib/cart-info";
 import CartDetails from "./_components/CartDetails";
+import { transformCartData } from "@/utils/cartUtils";
 
-const CartPage = () => {
+const CartPage = async () => {
+  const cartInfo = await getCartInfo();
+
+  const transformedCartData = cartInfo && transformCartData(cartInfo); 
+  const checkOutUrl = cartInfo && cartInfo.checkoutUrl;
+
   return (
     <div className="max-w-container mx-auto px-4">
       <Breadcrumbs title="Cart" prevLocation={"/"} />
-      <CartDetails />
+      {
+        transformedCartData && checkOutUrl && (
+          <CartDetails cartInfo={transformedCartData} checkOutUrl={checkOutUrl} />
+        )
+      }
     </div>
   );
 };

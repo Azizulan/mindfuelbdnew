@@ -2,9 +2,9 @@ import {
   HIDDEN_PRODUCT_TAG,
   SHOPIFY_GRAPHQL_API_ENDPOINT,
   TAGS,
-} from "@/lib/constants";
-import { ensureStartsWith } from "@/lib/shopifyutils";
-import { isShopifyError } from "@/lib/type-guards";
+} from "@/lib/shopify/constants";
+import { ensureStartsWith } from "@/lib/shopify/shopifyutils";
+import { isShopifyError } from "@/lib/shopify/type-guards";
 import { revalidateTag } from "next/cache";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";

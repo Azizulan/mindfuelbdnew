@@ -1,25 +1,24 @@
 "use client";
 
-import React from "react";
-import { BsSuitHeartFill } from "react-icons/bs";
-import { GiReturnArrow } from "react-icons/gi";
-import { FaShoppingCart } from "react-icons/fa";
-import { MdOutlineLabelImportant } from "react-icons/md";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { ProductsList } from "@/interface";
 import { urlGenerate } from "@/utils/urlGenerate";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { BsSuitHeartFill } from "react-icons/bs";
+import { FaShoppingCart } from "react-icons/fa";
+import { GiReturnArrow } from "react-icons/gi";
+import { MdOutlineLabelImportant } from "react-icons/md";
 // import { useDispatch } from "react-redux";
 // import { addToCart } from "../../../redux/orebiSlice"; // Uncomment if you are using Redux
 
-type ProductCardProps = ProductsList
+type ProductCardProps = ProductsList;
 
 const ProductCard: React.FC<ProductCardProps> = ({
   productName,
-  img,
+  image,
   price,
-  color,
-  badge,
+
   _id,
 }) => {
   // const dispatch = useDispatch(); // Uncomment if using Redux
@@ -54,7 +53,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className="max-w-80 max-h-80 relative overflow-y-hidden">
         <Image
           className="w-full h-full"
-          src={img}
+          src={image}
           height={500}
           width={500}
           alt={productName}
@@ -94,10 +93,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <h2 className="text-lg text-primeColor font-bold">{productName}</h2>
           <p className="text-[#767676] text-[14px]">${price}</p>
         </div>
-        <p className="text-[#767676] text-[14px]">{color}</p>
+        {/* <p className="text-[#767676] text-[14px]">{color}</p> */}
       </div>
     </div>
   );
 };
 
 export default ProductCard;
+

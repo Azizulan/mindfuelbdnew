@@ -1,6 +1,6 @@
 import React from "react";
 
-const Heading = ({ heading }) => {
+const Heading = ({ heading }: { heading: any }) => {
   return <div className="text-3xl font-semibold pb-6">{heading}</div>;
 };
 

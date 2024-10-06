@@ -1,8 +1,8 @@
 "use client";
 
-import { useAppDispatch } from "@/hooks/redux.hooks";
-import { CartProduct } from "@/interface";
-import { decreaseQuantity, increaseQuantity, removeFromCart } from "@/redux/product";
+import { CartProduct } from "@/interface/cart";
+
+// import { decreaseQuantity, increaseQuantity, removeFromCart } from "@/redux/product";
 import Image from "next/image";
 import { ImCross } from "react-icons/im";
 
@@ -11,21 +11,20 @@ interface ItemCardProps {
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
-  const dispatch = useAppDispatch();
-
-  console.log(item);
-
   const handleDeleteItem = () => {
-    dispatch(removeFromCart(item));
+    console.log("delete item");
   };
 
   const handleIncreaseQuantity = () => {
-    dispatch(increaseQuantity(item));
+    console.log("increase quantity");
   };
 
   const handleDecreaseQuantity = () => {
-    dispatch(decreaseQuantity(item));
+    console.log("decrease quantity");
   };
+
+  // Convert price to number to ensure consistency
+  const itemPrice = Number(item.price);
 
   return (
     <div className="w-full grid grid-cols-5 mb-4 border py-2">
@@ -36,16 +35,16 @@ const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
         />
         <Image
           className="w-32 h-32"
-          src={item.image}
+          src={item?.image || ""}
           alt="productImage"
           width={100}
           height={100}
         />
-        <h1 className="font-titleFont font-semibold">{item.title}</h1>
+        <h1 className="font-titleFont font-semibold">{item?.title || ""}</h1>
       </div>
       <div className="col-span-5 mdl:col-span-3 flex items-center justify-between py-4 mdl:py-0 px-4 mdl:px-0 gap-6 mdl:gap-0">
         <div className="flex w-1/3 items-center text-lg font-semibold">
-          ৳{item.price}
+          ৳{itemPrice.toFixed(2)}
         </div>
         <div className="w-1/3 flex items-center gap-6 text-lg">
           <span
@@ -63,7 +62,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
           </span>
         </div>
         <div className="w-1/3 flex items-center font-titleFont font-bold text-lg">
-          <p>৳{item.quantity * item.price}</p>
+          <p>৳{(item.quantity * itemPrice).toFixed(2)}</p>
         </div>
       </div>
     </div>

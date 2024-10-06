@@ -40,7 +40,6 @@ const LoginRightSide = () => {
       toast.error("Invalid Credentials! Please try again.", {
         position: "bottom-right",
       });
-      console.log(res);
       return;
     }
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Slider from "react-slick";
 import Link from "next/link";
 import Image from "next/image";
-import { urlGenerate } from "@/utils/urlGenerate";
+
 interface BannerProps {
   images: { id: string; src: string; alt: string }[];
 }
@@ -105,7 +105,7 @@ const Banner = ({ images }: BannerProps) => {
   return (
     <div className="w-full bg-white">
       <Slider {...settings}>
-        {images.map((image) => (
+        { images && images.length > 0 && images.map((image) => (
           <Link key={image.id} href={`#`}>
              <div className="relative w-full">
               <Image

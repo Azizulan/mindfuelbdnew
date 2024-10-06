@@ -5,8 +5,9 @@ import { motion } from "framer-motion";
 import { FaFacebook, FaYoutube, FaLinkedin, FaGithub } from "react-icons/fa";
 import FooterListTitle from "./FooterListTitle";
 import { paymentCard } from "@/assets/images";
-import Image from "../../designLayouts/Image";
+
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer = () => {
   const [emailInfo, setEmailInfo] = useState("");
@@ -22,7 +23,7 @@ const Footer = () => {
   const handleSubscription = () => {
     if (emailInfo === "") {
       setErrMsg("Please provide an Email !");
-    } else if (!emailValidation(emailInfo)) {
+    } else if (!emailValidation()) {
       setErrMsg("Please give a valid Email!");
     } else {
       setSubscription(true);
@@ -34,7 +35,7 @@ const Footer = () => {
     <div className="w-full bg-[#F5F5F3] py-20">
       <div className="max-w-container mx-auto grid grid-cols-1 md:grid-cols-2  xl:grid-cols-6 px-4 gap-10">
         <div className="col-span-2">
-          <FooterListTitle title=" More about Orebi Shop" />
+          <FooterListTitle title="MindFuel BD " />
           <div className="flex flex-col gap-6">
             <p className="text-base w-full xl:w-[80%]">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sint
@@ -164,7 +165,10 @@ const Footer = () => {
               className={`w-[80%] lg:w-[60%] mx-auto ${
                 subscription ? "mt-2" : "mt-6"
               }`}
-              imgSrc={paymentCard.src}
+              src={paymentCard.src}
+              alt="paymentCard"
+              width={100}
+              height={100}
             />
           </div>
         </div>

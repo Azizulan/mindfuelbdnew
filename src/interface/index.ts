@@ -118,14 +118,16 @@ export interface IProduct {
 
 export interface CartProduct {
   _id: string | number;
-  quantity: number;
-  price: number;
   title: string;
+  price: number | string; 
+  quantity: number;
   image: string;
   description: string;
   tags: string;
-  originalPrice: number;
+  originalPrice: number; 
   salePrice: number;
   sku: string;
-  weight: number;
+  vendor: string;
+  totalPrice: number;
+  variantId: string;
 }

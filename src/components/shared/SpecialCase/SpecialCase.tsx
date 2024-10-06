@@ -1,13 +1,19 @@
-"use client";
+// "use client";
 
+// import { useAppSelector } from "@/hooks/redux.hooks";
+import { getCartInfo } from "@/lib/cart-info";
 import Link from "next/link";
 import { MdSwitchAccount } from "react-icons/md";
 import { RiShoppingCart2Fill } from "react-icons/ri";
-// import { useSelector } from "react-redux";
 
-const SpecialCase = () => {
-  // const products = useSelector((state) => state.orebiReducer.products);
-  const products = [];
+const SpecialCase = async () => {
+  // const products = useAppSelector((state) => state.products.cart);
+
+  const cartInfo = await getCartInfo();
+
+  const products = cartInfo?.lines?.map((line: any) => line.merchandise);
+
+  const length = products?.length || 0;
 
   return (
     <div className="fixed top-52 right-2 z-20 hidden md:flex flex-col gap-2">
@@ -29,9 +35,9 @@ const SpecialCase = () => {
             <RiShoppingCart2Fill className="text-2xl -translate-x-3 group-hover:translate-x-12 transition-transform duration-200" />
           </div>
           <p className="text-xs font-semibold font-titleFont">Buy Now</p>
-          {products.length > 0 && (
+          {length > 0 && (
             <p className="absolute top-1 right-2 bg-primeColor text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-semibold">
-              {products.length}
+              {length}
             </p>
           )}
         </div>

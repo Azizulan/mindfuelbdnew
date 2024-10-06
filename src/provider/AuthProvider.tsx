@@ -47,6 +47,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Run checkAuth on mount
   useEffect(() => {
     checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -9,9 +9,10 @@ const Contact = () => {
   const [errMessages, setErrMessages] = useState("");
 
   // Handling form input
-  const handleMessages = (e) => setMessages(e.target.value);
-  const handleName = (e) => setName(e.target.value);
-  const handleEmail = (e) => setEmail(e.target.value);
+  const handleMessages = (e: React.ChangeEvent<HTMLTextAreaElement>) => setMessages(e.target.value);
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+
 
   // Client-side validation
   const validateForm = () => {
@@ -28,7 +29,7 @@ const Contact = () => {
   };
 
   // Handle form submission
-  const handlePost = async (e) => {
+  const handlePost = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     console.log(name, email, messages);

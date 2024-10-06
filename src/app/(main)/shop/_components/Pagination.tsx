@@ -9,7 +9,7 @@ import React from "react";
 // Component to display current items
 const Items = ({ currentItems }: { currentItems: ProductsList[] }) => (
   <>
-    {currentItems?.map((item) => (
+    {currentItems && currentItems.length > 0 && currentItems?.map((item) => (
       <div key={item._id} className="w-full">
         <ProductCard {...item} />
       </div>

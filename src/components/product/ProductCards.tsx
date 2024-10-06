@@ -1,8 +1,6 @@
 "use client";
 
-import { useAppDispatch } from "@/hooks/redux.hooks";
 import { ProductsList } from "@/interface";
-import { addToCart, addToWishlist } from "@/redux/product";
 import { urlGenerate } from "@/utils/urlGenerate";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -10,58 +8,31 @@ import React from "react";
 import { BsSuitHeartFill } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineLabelImportant } from "react-icons/md";
+import AddToCartButton from "./AddToCartButton";
 
 type ProductCardProps = ProductsList;
 
-const ProductCard: React.FC<ProductCardProps> = (props) => {
-  const {
-    image,
-    price,
-    _id,
-    description,
-    originalPrice,
-    salePrice,
-    sku,
-    tags,
-    title,
-    weight,
-  } = props;
+const ProductCard: React.FC<ProductCardProps> = (props: any) => {
+  const { image, price, _id, title, variantId } = props;
 
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const rootId = urlGenerate(title, _id);
-
-  // Reusable handler for dispatching actions
-  const handleAction = (action: "cart" | "wishlist") => {
-    const productData = {
-      _id,
-      price: Number(price),
-      image,
-      description,
-      originalPrice: Number(originalPrice),
-      salePrice: Number(salePrice),
-      sku,
-      tags,
-      weight,
-      quantity: 1,
-      title,
-    };
-    
-    if (action === "cart") {
-      dispatch(addToCart(productData));
-      console.log("Add to cart:", title);
-    } else if (action === "wishlist") {
-      dispatch(addToWishlist(productData));
-    }
-  };
 
   // Navigate to product details page
   const handleProductDetails = () => {
     router.push(`/product/${rootId}`);
   };
 
+  const handleAction = (action: string) => {
+    console.log("action", action);
+  };
+
   // Reusable function to render action list items
-  const renderActionItem = (label: string, Icon: React.ReactNode, onClick: () => void) => (
+  const renderActionItem = (
+    label: string,
+    Icon: React.ReactNode,
+    onClick: () => void
+  ) => (
     <li
       onClick={onClick}
       className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
@@ -84,9 +55,23 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
         {/* Product actions that appear on hover */}
         <div className="w-full h-32 absolute bg-white -bottom-[130px] group-hover:bottom-0 duration-700">
           <ul className="w-full h-full flex flex-col items-end justify-center gap-2 font-titleFont px-2 border-l border-r">
-            {renderActionItem("Add to Cart", <FaShoppingCart />, () => handleAction("cart"))}
-            {renderActionItem("View Details", <MdOutlineLabelImportant />, handleProductDetails)}
-            {renderActionItem("Add to Wish List", <BsSuitHeartFill />, () => handleAction("wishlist"))}
+            {/* AddToCartButton Component */}
+            <li className="w-full flex justify-end">
+              <AddToCartButton
+                className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
+                variantId={Number(variantId)}
+              >
+                <FaShoppingCart className="mr-1" /> Add to Cart
+              </AddToCartButton>
+            </li>
+            {renderActionItem(
+              "View Details",
+              <MdOutlineLabelImportant />,
+              handleProductDetails
+            )}
+            {renderActionItem("Add to Wish List", <BsSuitHeartFill />, () =>
+              handleAction("wishlist")
+            )}
           </ul>
         </div>
       </div>
@@ -103,3 +88,4 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
 };
 
 export default ProductCard;
+

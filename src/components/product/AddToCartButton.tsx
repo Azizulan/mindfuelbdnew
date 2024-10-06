@@ -1,57 +1,48 @@
 "use client";
 
+import { addItem } from "@/app/actions/cart";
 import { useAppDispatch } from "@/hooks/redux.hooks";
-import { IProduct } from "@/interface";
 import { addToCart } from "@/redux/product";
-import React from "react";
+import React, { useState, useTransition } from "react";
+import { toast } from "sonner";
 
 interface Props {
-  productInfo: IProduct;
   className: string;
   children: React.ReactNode;
+  variantId: string | number;
 }
 
-const AddToCartButton = ({ className, children, productInfo }: Props) => {
+const AddToCartButton = ({ className, children, variantId }: Props) => {
   const dispatch = useAppDispatch();
+  const [isPending, startTransition] = useTransition(); 
+  const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    _id,
-    price,
-    title,
-    image,
-    description,
-    originalPrice,
-    salePrice,
-    sku,
-    tags,
-    weight,
-    variantId,
-  } = productInfo;
+  const handleClick = () => {
+    setIsLoading(true);
 
-  const handleClick = async () => {
-    dispatch(
-      addToCart({
-        _id,
-        quantity: 1,
-        price: Number(price),
-        title,
-        image,
-        description,
-        originalPrice: Number(originalPrice),
-        salePrice: Number(salePrice),
-        sku: sku || "",
-        tags: tags || "",
-        weight: Number(weight),
-      })
-    );
+    startTransition(async () => {
+      try {
+        const cartInfo = await addItem(variantId);
+        if (cartInfo?.code && cartInfo.code === 200) {
+          dispatch(addToCart(cartInfo.data));
+
+          toast.success("Product added to cart");
+        } else {
+          toast.error("Failed to add product");
+        }
+      } catch (error) {
+        toast.error(`An error occurred: ${error instanceof Error ? error.message : String(error)}`);
+      } finally {
+        setIsLoading(false);
+      }
+    });
   };
 
   return (
-    <button className={className} onClick={handleClick}>
+    <button className={className} onClick={handleClick} disabled={isLoading || isPending}>
       {children}
     </button>
   );
 };
 
 export default AddToCartButton;
-

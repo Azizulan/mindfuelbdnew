@@ -1,9 +1,10 @@
+/* eslint-disable */
+
 "use client";
 
-import React from "react";
 import { BsSuitHeartFill } from "react-icons/bs";
-import { GiReturnArrow } from "react-icons/gi";
 import { FaShoppingCart } from "react-icons/fa";
+import { GiReturnArrow } from "react-icons/gi";
 import { MdOutlineLabelImportant } from "react-icons/md";
 import Image from "../../designLayouts/Image";
 import Badge from "./Badge";
@@ -12,16 +13,14 @@ import Badge from "./Badge";
 // import { addToCart } from "../../../redux/orebiSlice";
 import { useRouter } from "next/navigation";
 
-const Product = (props) => {
-
-
+const Product = (props: any) => {
   // const dispatch = useDispatch();
   const _id = props.productName;
 
-  const idString = (_id) => {
+  const idString = (_id: any) => {
     return String(_id).toLowerCase().split(" ").join("");
   };
-  
+
   const rootId = idString(_id);
 
   const router = useRouter();
@@ -34,14 +33,10 @@ const Product = (props) => {
     // });
   };
 
-
-  const addToCart = (product) => {}
-  const dispatch = (addToCart) => {}
-
+  // const addToCart = () => {};
+  const dispatch = () => {};
 
   return (
-
-    
     <div className="w-full relative group">
       <div className="max-w-80 max-h-80 relative overflow-y-hidden ">
         <div>
@@ -59,19 +54,7 @@ const Product = (props) => {
               </span>
             </li>
             <li
-              onClick={() =>
-                dispatch(
-                  addToCart({
-                    _id: props._id,
-                    name: props.productName,
-                    quantity: 1,
-                    image: props.img,
-                    badge: props.badge,
-                    price: props.price,
-                    colors: props.color,
-                  })
-                )
-              }
+              onClick={() => dispatch()}
               className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
             >
               Add to Cart

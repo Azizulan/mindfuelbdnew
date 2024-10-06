@@ -13,7 +13,7 @@ export default async function Home() {
   const { products } = await getProducts();
   const productsData = sanitizeProductArrayData(products);
 
-  const images = products.map((product: Product) => {
+  const images = products && products.map((product: Product) => {
     return {
       id: product.id,
       src: product.image.src,

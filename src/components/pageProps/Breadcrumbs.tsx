@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiOutlineChevronRight } from "react-icons/hi";
 
-const Breadcrumbs = ({ prevLocation, title }) => {
+const Breadcrumbs = ({ prevLocation, title }: { prevLocation: any; title: any }) => {
   const location = usePathname();
   const [locationPath, setLocationPath] = useState("");
   useEffect(() => {

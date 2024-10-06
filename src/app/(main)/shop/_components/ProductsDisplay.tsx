@@ -1,6 +1,6 @@
 "use client";
 
-import Pagination from "@/components/pageProps/shopPage/Pagination";
+import Pagination from "./Pagination"; 
 import ProductBanner from "@/app/(main)/shop/_components/ProductBanner";
 import { ProductsList } from "@/interface";
 import { useState } from "react";
