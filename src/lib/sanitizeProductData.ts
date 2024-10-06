@@ -10,7 +10,7 @@ export const sanitizeProductArrayData = (
         _id: item.id,
         img: item.image?.src || "",
         productName: item.title,
-        price: item.variants[0]?.price || "0",
+        price: item.variants[0]?.price || 0,
         color: item.options[0]?.values[0] || "",
         badge: item.status === "active" ? "New" : "",
         des: item.body_html,
@@ -27,7 +27,7 @@ export const sanitizeProductArrayData = (
       };
     });
 
-  return sanitizedProducts;
+  return sanitizedProducts as ProductsList[];
 };
 
 export const sanitizeProductData = (product: Product): IProduct | null => {
@@ -38,7 +38,7 @@ export const sanitizeProductData = (product: Product): IProduct | null => {
   return {
     _id: product.id,
     title: product.title,
-    price: product.variants[0]?.price || "0",
+    price: product.variants[0]?.price || 0,
     image: product.image?.src || "",
     description: product.body_html,
     quantity: product.variants[0]?.inventory_quantity || 0,
