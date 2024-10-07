@@ -5,7 +5,8 @@ import { transformCartData } from "@/utils/cartUtils";
 
 const CartPage = async () => {
   const cartInfo = await getCartInfo();
-
+  // console.log(cartInfo?.lines[0].merchandise.id , "---cartInfo \n");
+  
   const transformedCartData = cartInfo && transformCartData(cartInfo); 
   const checkOutUrl = cartInfo && cartInfo.checkoutUrl;
 

@@ -9,13 +9,19 @@ const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
 export async function getProducts() {
   try {
+    console.log(url);
+    console.log("SHOPIFY_ACCESS_TOKEN", SHOPIFY_ACCESS_TOKEN);
+    
+    
     const product = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "X-Shopify-Access-Token": SHOPIFY_ACCESS_TOKEN,
+        "X-Shopify-Access-Token": SHOPIFY_ACCESS_TOKEN 
       } as HeadersInit,
-    });
+    }); 
+    console.log(product);  
+    
     const productData = await product.json();
     return productData;
   } catch (err) {

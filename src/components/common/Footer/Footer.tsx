@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaFacebook, FaYoutube, FaLinkedin, FaGithub } from "react-icons/fa";
 import FooterListTitle from "./FooterListTitle";
-import { paymentCard } from "@/assets/images";
+import { paymentCard } from "@/assets/images"; 
 
 import Link from "next/link";
 import Image from "next/image";

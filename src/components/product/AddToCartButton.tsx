@@ -23,6 +23,8 @@ const AddToCartButton = ({ className, children, variantId }: Props) => {
     startTransition(async () => {
       try {
         const cartInfo = await addItem(variantId);
+        console.log(cartInfo);
+        
         if (cartInfo?.code && cartInfo.code === 200) {
           dispatch(addToCart(cartInfo.data));
 

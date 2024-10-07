@@ -10,6 +10,7 @@ import {
   updateCart,
 } from "@/lib/shopify/shopify";
 import { transformCartData } from "@/utils/cartUtils";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 function formatShopifyVariantId(variantId: string): string {
@@ -57,6 +58,8 @@ export const addItem = async (
       { merchandiseId: formattedVariantId, quantity: 1 },
     ]);
 
+    revalidatePath("/cart");
+
     // @ts-expect-error - TODO: Fix this
     const cartInfo = transformCartData(response);
 
@@ -77,18 +80,35 @@ export const addItem = async (
   }
 };
 
-export const removeItem = async (
-  lineId: string
-): Promise<string | undefined> => {
+export const removeItem = async (lineId: string): Promise<Response> => {
   const cartId = cookies().get("cartId")?.value;
 
   if (!cartId) {
-    return "Missing cart ID";
+    return {
+      data: null,
+      error: "Missing cart ID",
+      code: 400,
+      message: "Missing cart ID",
+    };
   }
   try {
     await removeFromCart(cartId, [lineId]);
+
+    revalidatePath("/cart");
+
+    return {
+      data: null,
+      error: null,
+      code: 200,
+      message: "Item removed from cart",
+    };
   } catch (e) {
-    return "Error removing item from cart";
+    return {
+      data: null,
+      error: (e as Error).message || "Error removing item from cart",
+      code: 500,
+      message: "Error removing item from cart",
+    };
   }
 };
 
@@ -100,21 +120,40 @@ export const updateItemQuantity = async ({
   lineId: string;
   variantId: string;
   quantity: number;
-}): Promise<string | undefined> => {
+}): Promise<Response> => {
   const cartId = cookies().get("cartId")?.value;
 
   if (!cartId) {
-    return "Missing cart ID";
+    return {
+      data: null,
+      error: "Missing cart ID",
+      code: 400,
+      message: "Missing cart ID",
+    };
   }
   try {
-    await updateCart(cartId, [
+    const res = await updateCart(cartId, [
       {
         id: lineId,
         merchandiseId: variantId,
         quantity,
       },
     ]);
+
+    revalidatePath("/cart");
+
+    return {
+      data: res,
+      error: null,
+      code: 200,
+      message: "Item quantity updated",
+    };
   } catch (e) {
-    return "Error updating item quantity";
+    return {
+      data: null,
+      error: (e as Error).message || "Error updating item quantity",
+      code: 500,
+      message: "Error updating item quantity",
+    };
   }
 };

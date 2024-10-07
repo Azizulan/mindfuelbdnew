@@ -91,6 +91,7 @@ export interface CartProduct {
   price: number;  
   totalCost: string;  
   image?: string;  
+  variantId: string;
 }
 
 export interface TransformedCartInfo {
