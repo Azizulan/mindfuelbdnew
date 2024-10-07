@@ -1,23 +1,23 @@
-// "use client";
-
-// import { useAppSelector } from "@/hooks/redux.hooks";
 import { getCartInfo } from "@/lib/cart-info";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { MdSwitchAccount } from "react-icons/md";
 import { RiShoppingCart2Fill } from "react-icons/ri";
-
+// MindFuel_accessToken
 const SpecialCase = async () => {
-  // const products = useAppSelector((state) => state.products.cart);
-
   const cartInfo = await getCartInfo();
 
   const products = cartInfo?.lines?.map((line: any) => line.merchandise);
 
   const length = products?.length || 0;
 
+  const incomingCookies = cookies();
+
+  const isLogin = incomingCookies.get("MindFuel_accessToken")?.value || null;
+
   return (
     <div className="fixed top-52 right-2 z-20 hidden md:flex flex-col gap-2">
-      <Link href="/signin">
+      <Link href={isLogin ? "/profile" : "/signin"}>
         <div className="bg-white w-16 h-[70px] rounded-md flex flex-col gap-1 text-[#33475b] justify-center items-center shadow-testShadow overflow-x-hidden group cursor-pointer">
           <div className="flex justify-center items-center">
             <MdSwitchAccount className="text-2xl -translate-x-12 group-hover:translate-x-3 transition-transform duration-200" />
@@ -27,6 +27,7 @@ const SpecialCase = async () => {
           <p className="text-xs font-semibold font-titleFont">Profile</p>
         </div>
       </Link>
+
       <Link href="/cart">
         <div className="bg-white w-16 h-[70px] rounded-md flex flex-col gap-1 text-[#33475b] justify-center items-center shadow-testShadow overflow-x-hidden group cursor-pointer relative">
           <div className="flex justify-center items-center">

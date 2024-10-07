@@ -11,6 +11,10 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
     storeRef.current = makeStore();
   }
 
+  
+
+
+
   return <Provider store={storeRef.current}>{children}</Provider>;
 };
 

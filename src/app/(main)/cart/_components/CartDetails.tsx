@@ -1,8 +1,8 @@
 "use client";
 
-import { useAppDispatch } from "@/hooks/redux.hooks";
+// import { useAppDispatch } from "@/hooks/redux.hooks";
 import { TransformedCartInfo } from "@/interface/cart";
-import { resetCart } from "@/redux/product";
+// import { resetCart } from "@/redux/product";
 import { useEffect, useState } from "react";
 import CartSummary from "./CartSummary";
 import ShippingOptions from "./ShippingOptions";
@@ -21,7 +21,7 @@ interface CartInfoProps {
 }
 
 const CartDetails: React.FC<CartInfoProps> = ({ cartInfo, checkOutUrl }) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [cartData, setCartData] = useState<TransformedCartInfo>(cartInfo);
 
   const [totalAmt, setTotalAmt] = useState<number>(0);
@@ -32,12 +32,12 @@ const CartDetails: React.FC<CartInfoProps> = ({ cartInfo, checkOutUrl }) => {
     setCartData(cartInfo);
   }, [cartInfo]);
 
-  const handleResetCart = () => {
-    dispatch(resetCart());
-    setCartData({ totalItems: 0, totalCost: undefined, currency: undefined, products: [] });
-    setTotalAmt(0);
-    setShippingCharge(shippingCharges.insideDhaka);
-  };
+  // const handleResetCart = () => {
+  //   dispatch(resetCart());
+  //   setCartData({ totalItems: 0, totalCost: undefined, currency: undefined, products: [] });
+  //   setTotalAmt(0);
+  //   setShippingCharge(shippingCharges.insideDhaka);
+  // };
 
   useEffect(() => {
     if (cartData.products.length > 0) {
@@ -59,18 +59,21 @@ const CartDetails: React.FC<CartInfoProps> = ({ cartInfo, checkOutUrl }) => {
     setShippingCharge(shippingCharges[shippingOption]);
   };
 
+  console.log(cartData , "---cartData");
+  
+
   return (
     <div className="p-6 max-w-7xl mx-auto">
       {cartData.products.length > 0 ? (
         <div className="pb-20">
           <ItemList cartData={cartData} />
 
-          <button
+          {/* <button
             onClick={handleResetCart}
             className="py-2 px-10 bg-red-500 text-white font-semibold uppercase mb-4 hover:bg-red-700 duration-300"
           >
             Reset Cart
-          </button>
+          </button> */}
 
           <ShippingOptions
             selectedShipping={selectedShipping}

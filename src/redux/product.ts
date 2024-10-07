@@ -50,7 +50,7 @@ export const productSlice = createSlice({
     },
 
     // Increase item quantity in cart
-    increaseQuantity: (state, action: PayloadAction<IProduct>) => {
+    increaseQuantity: (state, action: PayloadAction<any>) => {
       const item = state.cart.find(
         (item) => item._id === action.payload._id
       );
@@ -60,7 +60,7 @@ export const productSlice = createSlice({
     },
 
     // Decrease item quantity in cart
-    decreaseQuantity: (state, action: PayloadAction<IProduct>) => {
+    decreaseQuantity: (state, action: PayloadAction<any>) => {
       const item = state.cart.find(
         (item) => item._id === action.payload._id
       );
@@ -70,7 +70,7 @@ export const productSlice = createSlice({
     },
 
     // Delete item from cart
-    deleteItem: (state, action: PayloadAction<IProduct>) => {
+    deleteItem: (state, action: PayloadAction<any>) => {
       state.cart = state.cart.filter(
         (item) => item._id !== action.payload._id
       );

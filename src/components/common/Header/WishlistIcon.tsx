@@ -1,3 +1,5 @@
+"use client";
+
 import { FaHeart } from "react-icons/fa";
 import Link from "next/link";
 import { useAppSelector } from "@/hooks/redux.hooks"; // Assuming you're using Redux

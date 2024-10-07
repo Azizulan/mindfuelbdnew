@@ -17,7 +17,7 @@ const ItemList: React.FC<ItemListProps> = ({ cartData }) => {
       </div>
       <div className="mt-5">
         {cartData.products.map((item, index) => (
-          <ItemCard key={`${item.id}-${index}`} item={item} />
+          <ItemCard key={`${item.id}-${index}`} item={item}  />
         ))}
       </div>
     </div>
