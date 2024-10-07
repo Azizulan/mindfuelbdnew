@@ -43,8 +43,7 @@ const Footer = () => {
             </p>
             <ul className="flex items-center gap-2">
               <Link
-                href="https://www.youtube.com/@reactjsBD"
-                target="_blank"
+                href="#"
                 rel="noreferrer"
               >
                 <li className="w-7 h-7 bg-primeColor text-gray-100 hover:text-white cursor-pointer text-lg rounded-full flex justify-center items-center hover:bg-black duration-300">
@@ -52,17 +51,15 @@ const Footer = () => {
                 </li>
               </Link>
               <Link
-                href="https://github.com/noorjsdivs"
-                target="_blank"
-                rel="noreferrer"
+                href="#"
+                rel="Tanzim Hossain2"
               >
                 <li className="w-7 h-7 bg-primeColor text-gray-100 hover:text-white cursor-pointer text-lg rounded-full flex justify-center items-center hover:bg-black duration-300">
                   <FaGithub />
                 </li>
               </Link>
               <Link
-                href="https://www.facebook.com/Noorlalu143/"
-                target="_blank"
+                href="hhttps://www.facebook.com/mindfuelbd"
                 rel="noreferrer"
               >
                 <li className="w-7 h-7 bg-primeColor text-gray-100 hover:text-white cursor-pointer text-lg rounded-full flex justify-center items-center hover:bg-black duration-300">
@@ -70,8 +67,7 @@ const Footer = () => {
                 </li>
               </Link>
               <a
-                href="https://www.linkedin.com/in/noor-mohammad-ab2245193/"
-                target="_blank"
+                href="#"
                 rel="noreferrer"
               >
                 <li className="w-7 h-7 bg-primeColor text-gray-100 hover:text-white cursor-pointer text-lg rounded-full flex justify-center items-center hover:bg-black duration-300">

@@ -13,7 +13,7 @@ const Items = ({ currentItems }: { currentItems: ProductsList[] }) => (
       <div key={item._id} className="w-full">
         <ProductCard {...item} />
       </div>
-    ))}s
+    ))}
   </>
 );
 
