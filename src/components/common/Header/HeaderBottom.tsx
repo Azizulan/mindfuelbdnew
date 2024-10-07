@@ -1,5 +1,3 @@
-"use client";
-
 import Flex from "../../designLayouts/Flex";
 import CartIcon from "./CartIcon";
 import CategoryMenu from "./CategoryMenu";
