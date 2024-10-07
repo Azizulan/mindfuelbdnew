@@ -9,10 +9,7 @@ const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
 export async function getProducts() {
   try {
-    console.log(url);
-    console.log("SHOPIFY_ACCESS_TOKEN", SHOPIFY_ACCESS_TOKEN);
-    
-    
+
     const product = await fetch(url, {
       method: "GET",
       headers: {
@@ -20,14 +17,13 @@ export async function getProducts() {
         "X-Shopify-Access-Token": SHOPIFY_ACCESS_TOKEN 
       } as HeadersInit,
     }); 
-    console.log(product);  
-    
+
     const productData = await product.json();
     return productData;
   } catch (err) {
     console.log(err);
   }
-}
+} 
 
 export async function getProductById(id: string) {
   const url = `${process.env.SHOPIFY_STORE_URL}/admin/api/2024-10/products/${id}.json`;
